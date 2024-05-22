@@ -10,39 +10,47 @@
 
 //// Replace this comment with your code.
 
-(INIT)  	
-	@8192	 
-    D=A
-	@i                   
-	M=D
+@place 
+  M=0 
 
-(LOOP)	            
-	@i
-	M=M-1
-	D=M
-	@INIT
-	D;JLT               
-	@KBD	            
-	D=M
-	@WHITE		        
-	D;JEQ
-	@BLACK
-	0;JMP
-
-(BLACK)             
-	@SCREEN            
-	D=A
-	@i
-	A=D+M              
-	M=-1               
-	@LOOP              
-	0;JMP
+(LOOP)
+  @KBD 
+  D=M 
+  @WHITE
+  D;JEQ 
+  @BLACK
+  0;JMP 
 
 (WHITE)
-	@SCREEN            
-	D=A                
-	@i        
-	A=D+M              
-	M=0               
-	@LOOP           
-	0;JMP
+  @place
+  D=M 
+  @LOOP
+  D;JLT 
+  @place
+  D=M
+  @SCREEN
+  A=A+D 
+  M=0 
+  @place
+  M=M-1 
+  @LOOP
+  0;JMP 
+(BLACK)
+  @place
+  D=M
+  @8192 
+  D=D-A
+  @LOOP
+  D;JGE 
+  @place
+  D=M
+  @SCREEN
+  A=A+D 
+  M=-1 
+  @place
+  M=M+1 
+  @LOOP
+  0;JMP 
+(END)
+  @END
+  0;JMP 
